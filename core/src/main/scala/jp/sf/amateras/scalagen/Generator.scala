@@ -18,13 +18,13 @@ trait Generator {
 /**
  * A base class for source code generators.
  */
-abstract class GeneratorBase(targetDir: File, charset: String = "UTF-8") extends Generator {
+abstract class GeneratorBase(settings: Settings) extends Generator {
 
   def generate(tables: List[Table]): Unit = {
     tables.foreach { table =>
       val generateFileInfo = generate(table)
       val file = new File(generateFileInfo.outputDir, generateFileInfo.filename)
-      file.write(generateFileInfo.content, charset)
+      file.write(generateFileInfo.content, settings.charset)
     }
   }
 
