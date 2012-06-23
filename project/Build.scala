@@ -16,10 +16,8 @@ object Build extends Build {
     settings = commonSettings ++ Seq(
       sbtPlugin := false,
       libraryDependencies ++= Seq(
-        "com.typesafe" % "config" % "0.4.1",
-        "jp.sf.amateras" %% "scala-utils" % "0.0.1-SNAPSHOT",
-        "org.scala-tools.testing" % "specs_2.8.1" % "1.6.8" % "test",
-        "org.mockito" % "mockito-core" % "1.8.5" % "test"
+        "org.fusesource.scalate" % "scalate-core" % "1.5.3",
+        "jp.sf.amateras" %% "scala-utils" % "0.0.1-SNAPSHOT"
       )
     )
   )
@@ -27,13 +25,7 @@ object Build extends Build {
   lazy val scalaquery = Project(id = "scalagen-scalaquery",
     base = file("scalaquery"),
     settings = commonSettings ++ Seq(
-      sbtPlugin := false,
-      libraryDependencies ++= Seq(
-        "com.typesafe" % "config" % "0.4.1",
-        "jp.sf.amateras" %% "scala-utils" % "0.0.1-SNAPSHOT",
-        "org.scala-tools.testing" % "specs_2.8.1" % "1.6.8" % "test",
-        "org.mockito" % "mockito-core" % "1.8.5" % "test"
-      )
+      sbtPlugin := false
     )
   ) .dependsOn(core)
 
