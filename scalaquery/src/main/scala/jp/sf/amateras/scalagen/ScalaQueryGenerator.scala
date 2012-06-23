@@ -2,7 +2,7 @@ package jp.sf.amateras.scalagen
 
 import jp.sf.amateras.scalagen._
 
-class ScalaQuery extends GeneratorBase {
+class ScalaQueryGenerator extends GeneratorBase {
 
   def generate(settings: Settings, table: Table): String = {
     import settings._
