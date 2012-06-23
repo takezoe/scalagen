@@ -17,9 +17,8 @@ package jp.sf.amateras.scalagen
 object Scalagen {
 
   def generateFor[T <: Generator](settings: Settings)(implicit m: scala.reflect.Manifest[T]): Unit = {
-    val c = m.erasure.getConstructor(classOf[Settings])
-    c.newInstance(settings) match {
-      case generator: Generator => generator.generate(new SchemaLoader(settings).loadSchema())
+    m.erasure.newInstance() match {
+      case generator: Generator => generator.generate(settings, new SchemaLoader(settings).loadSchema())
     }
   }
 

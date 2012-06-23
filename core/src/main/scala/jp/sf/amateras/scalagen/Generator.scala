@@ -12,16 +12,18 @@ trait Generator {
   /**
    * Generates source code.
    */
-  def generate(tables: List[Table]): Unit
+  def generate(settings: Settings, tables: List[Table]): Unit
 
 }
 
 /**
  * A base class for source code generators.
  */
-abstract class GeneratorBase(settings: Settings) extends Generator {
+abstract class GeneratorBase extends Generator {
 
-  def generate(tables: List[Table]): Unit = {
+  def generate(settings: Settings, tables: List[Table]): Unit = {
+    import settings._
+
     val templateEngine = new TemplateEngine()
 
     tables.foreach { table =>
@@ -29,18 +31,18 @@ abstract class GeneratorBase(settings: Settings) extends Generator {
 
       val renderContext = new DefaultRenderContext(null, templateEngine, new PrintWriter(writer))
       renderContext.render(templatePath, Map(
-        "packageName" -> settings.packageName,
+        "packageName" -> packageName,
         "table"       -> table))
 
-      val outputDir = settings.packageName match {
-        case "" => settings.targetDir
-        case _  => new File(settings.targetDir, settings.packageName.replace(".", "/"))
+      val outputDir = packageName match {
+        case "" => targetDir
+        case _  => new File(targetDir, packageName.replace(".", "/"))
       }
 
       outputDir.mkdirs()
 
       val file = new File(outputDir, table.className + ".scala")
-      file.write(writer.toString(), settings.charset)
+      file.write(writer.toString(), charset)
     }
   }
 
