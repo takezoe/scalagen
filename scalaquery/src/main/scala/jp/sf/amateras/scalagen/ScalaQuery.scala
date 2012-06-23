@@ -1,4 +1,4 @@
-package jp.sf.amateras.scalagen.scalaquery
+package jp.sf.amateras.scalagen
 
 import jp.sf.amateras.scalagen._
 
