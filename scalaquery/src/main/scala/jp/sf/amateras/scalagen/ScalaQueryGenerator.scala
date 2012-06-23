@@ -13,7 +13,7 @@ class ScalaQueryGenerator extends GeneratorBase {
       "package " + packageName + "\n\n"
     } +
     "import org.scalaquery.ql.basic.{BasicTable => Table}\n\n" +
-    "object " + table.className + " extends Table[" + table.className + "](\"" + table.name + "\"){\n" +
+    "object " + table.className + "Table extends Table[" + table.className + "](\"" + table.name + "\"){\n" +
     table.columns.map { column =>
       "  def " + column.propertyName + " = column[" + propertyType(column) + "](\"" + column.name + "\")"
     }.mkString("\n") +
