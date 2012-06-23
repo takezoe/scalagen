@@ -32,11 +32,11 @@ You can configure Scalagen via ```jp.sf.amateras.scalagen.Settings```.
 
 property      | type      | description
 --------------|-----------|------------------------------------------------
-generator     | Generator | generator instance (rqeuired)
-driver        | String    | JDBC driver classname (rqeuired)
-url           | String    | JDBC connection url (rqeuired)
-username      | String    | JDBC connection username (rqeuired)
-password      | String    | JDBC connection password (rqeuired)
+generator     | Generator | generator instance (required)
+driver        | String    | JDBC driver classname (required)
+url           | String    | JDBC connection url (required)
+username      | String    | JDBC connection username (required)
+password      | String    | JDBC connection password (required)
 catalog       | String    | catalog (default is "%")
 schemaPattern | String    | schema pattern (default is "%")
 tablePattern  | String    | table pattern (default is "%")
