@@ -9,16 +9,15 @@ It possible to generate Table objects and case classes by the following code.
 ```scala
 import jp.sf.amateras.scalagen._
 
-Scalagen.generateFor[ScalaQuery](Settings(
-  generator = new jp.sf.amateras.scalagen.ScalaQuery(),
+Scalagen.generate(Settings(
+  generator = new ScalaQueryGenerator(),
   driver = "org.hsqldb.jdbcDriver",
   url = "jdbc:hsqldb:hsql://localhost/",
   username = "sa",
   password = "",
   catalog = null,
   schemaPattern = null,
-  tablePattern = null,
-  packageName = "models"))
+  tablePattern = null))
 ```
 
 Source files would be generated into ```/src/main/scala/models```.
@@ -74,8 +73,7 @@ scalagenConfiguration := jp.sf.amateras.scalagen.Settings(
   password = "",
   catalog = null,
   schemaPattern = null,
-  tablePattern = null,
-  packageName = "models"
+  tablePattern = null
 )
 ```
 
