@@ -1,5 +1,7 @@
 package jp.sf.amateras.scalagen
 
+import jp.sf.amateras.scala.util.StringConversions._
+
 /**
  * The table model.
  *
@@ -8,22 +10,7 @@ package jp.sf.amateras.scalagen
  */
 case class Table(name: String, columns: List[Column]){
 
-  val className: String = {
-    val sb = new StringBuilder
-    for(i <- 0 to name.length - 1){
-      val c = name.charAt(i)
-      if(i == 0){
-        sb.append(String.valueOf(c).toUpperCase())
-      } else if(c != '_'){
-        if(i > 0 && name.charAt(i - 1) == '_'){
-          sb.append(String.valueOf(c).toUpperCase())
-        } else {
-          sb.append(String.valueOf(c).toLowerCase())
-        }
-      }
-    }
-    sb.toString()
-  }
+  val className: String = name.uppercamel()
 
 }
 
@@ -36,30 +23,13 @@ case class Table(name: String, columns: List[Column]){
  */
 case class Column(name: String, dataType: Class[_], nullable: Boolean, primaryKey: Boolean){
 
-  val propertyName: String = {
-    val sb = new StringBuilder
-    for(i <- 0 to name.length - 1){
-      val c = name.charAt(i)
-      if(c != '_'){
-        if(i > 0 && name.charAt(i - 1) == '_'){
-          sb.append(String.valueOf(c).toUpperCase())
-        } else {
-          sb.append(String.valueOf(c).toLowerCase())
-        }
-      }
-    }
-    sb.toString()
-  }
+  val propertyName: String = name.lowercamel()
 
   val typeName: String = {
-    val className = dataType.getName()
-
-    if(className == "java.lang.String"){
-      "String"
-    } else if(className.indexOf('.') >= 0){
-      className
-    } else {
-      className.capitalize
+    dataType.getName() match {
+      case "java.lang.String" => "String"
+      case x if(x.indexOf(".") >= 0) => x
+      case x => x.capitalize
     }
   }
 
