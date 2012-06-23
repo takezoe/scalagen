@@ -9,14 +9,13 @@ object Build extends Build {
   lazy val root = Project(id = "scalagen",
     base = file("."),
     settings = commonSettings ++ Seq(
-      publishArtifact := false)) aggregate (core, scalaquery)
+      publishArtifact := false)) aggregate (core, scalaquery, sbtplugin)
 
   lazy val core = Project(id = "scalagen-core",
     base = file("core"),
     settings = commonSettings ++ Seq(
       sbtPlugin := false,
       libraryDependencies ++= Seq(
-        "org.fusesource.scalate" % "scalate-core" % "1.5.3",
         "jp.sf.amateras" %% "scala-utils" % "0.0.1-SNAPSHOT"
       )
     )
@@ -25,9 +24,20 @@ object Build extends Build {
   lazy val scalaquery = Project(id = "scalagen-scalaquery",
     base = file("scalaquery"),
     settings = commonSettings ++ Seq(
-      sbtPlugin := false
+      sbtPlugin := false,
+      libraryDependencies ++= Seq(
+        "org.scalatest" %% "scalatest" % "1.8" % "test",
+        "org.hsqldb" % "hsqldb" % "2.2.8" % "test"
+      )
     )
   ) .dependsOn(core)
+
+  lazy val sbtplugin = Project(id = "scalagen-sbtplugin",
+    base = file("sbtplugin"),
+    settings = commonSettings ++ Seq(
+      sbtPlugin := true
+    )
+  ) .dependsOn(core, scalaquery)
 
   def commonSettings = Defaults.defaultSettings ++
     Seq(

@@ -4,6 +4,7 @@ import java.io.File
 
 case class Settings(
     url: String,
+    driver: String,
     username: String,
     password: String,
     catalog: String = "%",

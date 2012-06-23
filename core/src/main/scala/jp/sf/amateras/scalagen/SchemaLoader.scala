@@ -17,6 +17,8 @@ class SchemaLoader(settings: Settings) {
   }
 
   def loadSchema(): List[Table] = {
+    Class.forName(settings.driver)
+
     using(DriverManager.getConnection(url, username, password)){ conn =>
       using(conn.getMetaData().getTables(catalog, schemaPattern, tablePattern, null)){ rs =>
         rs.process { rs =>
@@ -24,9 +26,7 @@ class SchemaLoader(settings: Settings) {
             case "TABLE" => Some(rs.getString("TABLE_NAME"))
             case _ => None
           }
-        }.flatten.map { case name =>
-          loadTable(conn, name)
-        }.toList
+        }.flatten.map { name => loadTable(conn, name) }.toList
       }
     }
   }
