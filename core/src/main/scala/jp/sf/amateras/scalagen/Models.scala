@@ -15,4 +15,4 @@ case class Table(name: String, columns: List[Column])
  * @param dataType the date type of the column
  * @param nullable the nullable flag
  */
-case class Column(name: String, dataType: Class[_], nullable: Boolean)
+case class Column(name: String, dataType: Class[_], nullable: Boolean, primaryKey: Boolean)
