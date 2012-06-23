@@ -49,7 +49,7 @@ In ```build.sbt```, add following configurations:
 seq(jp.sf.amateras.scalagen.ScalagenPlugin.scalagenSettings: _*)
 
 scalagenConfiguration := jp.sf.amateras.scalagen.Settings(
-  generator = new jp.sf.amateras.scalagen.ScalaQuery(),
+  generator = new jp.sf.amateras.scalagen.ScalaQueryGenerator(),
   driver = "org.hsqldb.jdbcDriver",
   url = "jdbc:hsqldb:hsql://localhost/",
   username = "sa",
