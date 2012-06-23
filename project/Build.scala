@@ -16,7 +16,7 @@ object Build extends Build {
     settings = commonSettings ++ Seq(
       sbtPlugin := false,
       libraryDependencies ++= Seq(
-        "jp.sf.amateras" %% "scala-utils" % "0.0.1-SNAPSHOT"
+        "jp.sf.amateras" %% "scala-utils" % "0.0.1-SNAPSHOT" changing()
       )
     )
   )
