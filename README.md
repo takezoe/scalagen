@@ -4,7 +4,7 @@ scalagen
 The source code generator for Scala ORMs.
 
 The current version of Scalagen support [ScalaQuery](http://scalaquery.org/).
-It possible to generate Table objects and case classes by the following code.
+It's possible to generate Table objects and case classes by the following code.
 
 ```scala
 import jp.sf.amateras.scalagen._
