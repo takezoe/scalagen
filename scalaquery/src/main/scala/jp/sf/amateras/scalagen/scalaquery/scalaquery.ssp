@@ -1,0 +1,9 @@
+<%@ val packageName: String %>
+<%@ val table: jp.sf.amateras.scalagen.Table %>
+package <%= packageName %>
+
+case class <%= table.name %>(
+  <% table.columns.zipWithIndex.foreach { case (column, i) => %>
+    <%= column.name %>: <%= column.dataType %><% if(i != columns.length - 1){%>,<% } %>
+  <% } %>
+)

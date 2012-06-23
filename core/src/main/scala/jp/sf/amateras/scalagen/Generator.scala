@@ -1,7 +1,8 @@
 package jp.sf.amateras.scalagen
 
-import java.io.File
+import java.io._
 import jp.sf.amateras.scala.util.io._
+import org.fusesource.scalate._
 
 /**
  * A trait for source code generators.
@@ -21,19 +22,26 @@ trait Generator {
 abstract class GeneratorBase(settings: Settings) extends Generator {
 
   def generate(tables: List[Table]): Unit = {
+    val templateEngine = new TemplateEngine()
+
     tables.foreach { table =>
-      val generateFileInfo = generate(table)
-      val file = new File(generateFileInfo.outputDir, generateFileInfo.filename)
-      file.write(generateFileInfo.content, settings.charset)
+      val writer = new StringWriter()
+
+      val renderContext = new DefaultRenderContext(null, templateEngine, new PrintWriter(writer))
+      renderContext.render(templatePath, Map(
+        "packageName" -> settings.packageName,
+        "table"       -> table))
+
+      val outputDir = settings.packageName match {
+        case "" => settings.targetDir
+        case _  => new File(settings.targetDir, settings.packageName.replace(".", "/"))
+      }
+
+      val file = new File(outputDir, table.name + ".scala")
+      file.write(writer.toString(), settings.charset)
     }
   }
 
-  /**
-   * Returns information of the source file for the given table model.
-   * Implement this method at the subclass.
-   */
-  def generate(table: Table): GenerateFileInfo
-
-  case class GenerateFileInfo(outputDir: File, filename: String, content: String)
+  val templatePath: String
 
 }
