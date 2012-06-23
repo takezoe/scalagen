@@ -2,6 +2,11 @@ package jp.sf.amateras.scalagen
 
 /**
  * The bootstrap class of Scalagen.
+ *
+ * {{{
+ * Scalagen.generateFor[ScalaQuery](
+ *   Setting("jdbc://xxxx", "sa", ""))
+ * }}}
  */
 object Scalagen {
 
