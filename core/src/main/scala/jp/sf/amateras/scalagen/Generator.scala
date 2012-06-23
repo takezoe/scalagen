@@ -37,7 +37,9 @@ abstract class GeneratorBase(settings: Settings) extends Generator {
         case _  => new File(settings.targetDir, settings.packageName.replace(".", "/"))
       }
 
-      val file = new File(outputDir, table.name + ".scala")
+      outputDir.mkdirs()
+
+      val file = new File(outputDir, table.className + ".scala")
       file.write(writer.toString(), settings.charset)
     }
   }

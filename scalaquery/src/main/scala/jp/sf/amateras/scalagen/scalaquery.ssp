@@ -1,9 +1,30 @@
 <%@ val packageName: String %>
 <%@ val table: jp.sf.amateras.scalagen.Table %>
+<% if(packageName != ""){ %>
 package <%= packageName %>
+<% } %>
 
-case class <%= table.name %>(
-  <% table.columns.zipWithIndex.foreach { case (column, i) => %>
-    <%= column.name %>: <%= column.dataType %><% if(i != columns.length - 1){%>,<% } %>
-  <% } %>
+import org.scalaquery.ql.basic.{BasicTable => Table}
+
+object <%= table.className %> extends Table[(<%= table.columns.map { column =>
+  if(column.nullable){
+    "Option[" + column.typeName + "]"
+  } else {
+    column.typeName
+  }
+}.mkString(", ") %>]("<%= table.name %>"){
+
+<% table.columns.foreach { case column => %>
+  def <%= column.propertyName %> = column[<% if(column.nullable) { %>Option[<%= column.typeName %>]<% } else { %><%= column.typeName %><% } %>]("<%= column.name %>")
+
+<% } %>
+  def * = <%= table.columns.map { column => column.propertyName }.mkString(" ~ ") %> <> (<%= table.className %>, <%= table.className %>.unapply, _)
+
+}
+
+case class <%= table.className %>(
+<% table.columns.zipWithIndex.foreach { case (column, i) => %>
+  <%= column.propertyName %>: <% if(column.nullable) { %>Option[<%= column.typeName %>]<% } else { %><%= column.typeName %><% } %><% if(i != table.columns.length - 1){%>,<% } %>
+
+<% } %>
 )
