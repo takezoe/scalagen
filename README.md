@@ -26,9 +26,27 @@ Source files would be generated into ```/src/main/scala/models```.
 Scalagen is still under development. So it has never been published to the public repository.
 You can get source code and build it from this git repository.
 
+##Configuration
+
+You can configure Scalagen via ```jp.sf.amateras.scalagen.Settings```.
+
+property      | type      | description
+--------------|-----------|------------------------------------------------
+generator     | Generator | generator instance (rqeuired)
+driver        | String    | JDBC driver classname (rqeuired)
+url           | String    | JDBC connection url (rqeuired)
+username      | String    | JDBC connection username (rqeuired)
+password      | String    | JDBC connection password (rqeuired)
+catalog       | String    | catalog (default is "%")
+schemaPattern | String    | schema pattern (default is "%")
+tablePattern  | String    | table pattern (default is "%")
+packageName   | String    | package name of generated source (default is "models")
+targetDir     | File      | output directory of generated source (default is new File("src/main/scala"))
+charset       | String    | chaarset of generated source (default is "UTF-8")
+
 ##sbt-plugin
 
-You can use Scalagen as sbt-plugin. In ```project/plugin.sbt```, add:
+Scalagen could be used as sbt-plugin. In ```project/plugin.sbt```, add:
 
 ```scala
 resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn-snapshot/")
@@ -61,4 +79,4 @@ scalagenConfiguration := jp.sf.amateras.scalagen.Settings(
 )
 ```
 
-Then execute ```sbt scalagen``` at command line. Source files for ScalaQuery are generated into ```src/main/scala/models```.
+Execute ```sbt scalagen```. Source files for ScalaQuery are generated into ```src/main/scala/models```.
