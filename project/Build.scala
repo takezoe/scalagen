@@ -24,11 +24,7 @@ object Build extends Build {
   lazy val scalaquery = Project(id = "scalagen-scalaquery",
     base = file("scalaquery"),
     settings = commonSettings ++ Seq(
-      sbtPlugin := false,
-      libraryDependencies ++= Seq(
-        "org.scalatest" %% "scalatest" % "1.8" % "test",
-        "org.hsqldb" % "hsqldb" % "2.2.8" % "test"
-      )
+      sbtPlugin := false
     )
   ) .dependsOn(core)
 
@@ -37,15 +33,12 @@ object Build extends Build {
     settings = commonSettings ++ Seq(
       sbtPlugin := true
     )
-  ) .dependsOn(core, scalaquery)
+  ) .dependsOn(core)
 
   def commonSettings = Defaults.defaultSettings ++
     Seq(
       organization := "jp.sf.amateras.scalagen",
       resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn-snapshot/"),
-
-      //publishArtifact in (Compile, packageDoc) := false,
-      //publishArtifact in Test := false,
 
       publishTo <<= (version) { version: String =>
         val repoInfo =

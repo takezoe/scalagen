@@ -16,10 +16,8 @@ package jp.sf.amateras.scalagen
  */
 object Scalagen {
 
-  def generateFor[T <: Generator](settings: Settings)(implicit m: scala.reflect.Manifest[T]): Unit = {
-    m.erasure.newInstance() match {
-      case generator: Generator => generator.generate(settings, new SchemaLoader(settings).loadSchema())
-    }
+  def generate(settings: Settings): Unit = {
+    settings.generator.generate(settings, new SchemaLoader(settings).loadSchema())
   }
 
 }
