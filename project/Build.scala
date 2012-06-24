@@ -44,6 +44,7 @@ object Build extends Build {
 
   def commonSettings = Defaults.defaultSettings ++
     Seq(
+      version := "0.1-SNAPSHOT",
       organization := "jp.sf.amateras.scalagen",
       resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn-snapshot/"),
 
