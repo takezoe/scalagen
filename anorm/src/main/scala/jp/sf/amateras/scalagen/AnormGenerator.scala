@@ -24,7 +24,7 @@ class AnormGenerator extends GeneratorBase {
     "    get[" + propertyType(column) + "](\"" + column.name + "\"),"
     }.mkString("\n") + "map {" +
     "      case " + table.columns.map(_.propertyName).mkString("~") + " => " + table.className + "(" + table.columns.map(_.propertyName) + ")\n" +
-    "    }\n"
+    "    }\n" +
     "  }\n" +
     "}\n\n"
   }
