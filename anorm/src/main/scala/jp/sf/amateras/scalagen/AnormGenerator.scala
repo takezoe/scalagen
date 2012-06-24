@@ -22,8 +22,8 @@ class AnormGenerator extends GeneratorBase {
     "  val simple = {" +
     table.columns.map { column =>
     "    get[" + propertyType(column) + "](\"" + column.name + "\"),"
-    }.mkString("\n") + "map {" +
-    "      case " + table.columns.map(_.propertyName).mkString("~") + " => " + table.className + "(" + table.columns.map(_.propertyName) + ")\n" +
+    }.mkString("\n") + "map {\n" +
+    "      case " + table.columns.map(_.propertyName).mkString(" ~ ") + " => " + table.className + "(" + table.columns.map(_.propertyName).mkString(", ") + ")\n" +
     "    }\n" +
     "  }\n" +
     "}\n\n"
