@@ -28,6 +28,13 @@ object Build extends Build {
     )
   ) .dependsOn(core)
 
+  lazy val anorm = Project(id = "scalagen-anorm",
+    base = file("anorm"),
+    settings = commonSettings ++ Seq(
+      sbtPlugin := false
+    )
+  ) .dependsOn(core)
+
   lazy val sbtplugin = Project(id = "scalagen-sbtplugin",
     base = file("sbtplugin"),
     settings = commonSettings ++ Seq(
