@@ -51,6 +51,8 @@ framework    | artifact            | generator classname
 -------------|---------------------|------------------------------------------------
 ScalaQuery   | scalagen-scalaquery | jp.sf.amateras.scalagen.ScalaQueryGenerator
 Anorm        | scalagen-anorm      | jp.sf.amateras.scalagen.AnormGenerator
+Squeryl      | TBD                 | TBD
+mirage-scala | TBD                 | TBD
 
 ##sbt-plugin
 
