@@ -2,6 +2,9 @@ package jp.sf.amateras.scalagen
 
 import jp.sf.amateras.scalagen._
 
+/**
+ * A generator implementation for Anorm.
+ */
 class AnormGenerator extends GeneratorBase {
 
   def generate(settings: Settings, table: Table): String = {
