@@ -9,7 +9,7 @@ object Build extends Build {
   lazy val root = Project(id = "scalagen",
     base = file("."),
     settings = commonSettings ++ Seq(
-      publishArtifact := false)) aggregate (core, scalaquery, sbtplugin)
+      publishArtifact := false)) aggregate (core, scalaquery, anorm, sbtplugin)
 
   lazy val core = Project(id = "scalagen-core",
     base = file("core"),
