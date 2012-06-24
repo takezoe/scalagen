@@ -3,8 +3,8 @@ scalagen
 
 The source code generator for Scala ORMs.
 
-The current version of Scalagen support [ScalaQuery](http://scalaquery.org/).
-It's possible to generate Table objects and case classes by the following code.
+The current version of Scalagen support [ScalaQuery](http://scalaquery.org/) and [Anorm](http://www.playframework.org/modules/scala-0.9.1/anorm).
+It's possible to generate Table objects and case classes for ScalaQuery by the following code.
 
 ```scala
 import jp.sf.amateras.scalagen._
@@ -43,6 +43,15 @@ packageName   | String    | package name of generated source (default is "models
 targetDir     | File      | output directory of generated source (default is new File("src/main/scala"))
 charset       | String    | chaarset of generated source (default is "UTF-8")
 
+###Generators
+
+Scalagen supports following ORMs. Specify a generator which corresponds to your ORM at ```Settings#generator```.
+
+framework    | artifact            | generator classname
+-------------|---------------------|------------------------------------------------
+ScalaQuery   | scalagen-scalaquery | jp.sf.amateras.scalagen.ScalaQueryGenerator
+Anorm        | scalagen-anorm      | jp.sf.amateras.scalagen.AnormGenerator
+
 ##sbt-plugin
 
 Scalagen could be used as sbt-plugin. In ```project/plugin.sbt```, add:
@@ -53,9 +62,11 @@ resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn-snapsho
 addSbtPlugin("jp.sf.amateras.scalagen" % "scalagen-sbtplugin" % "0.1-SNAPSHOT")
 
 libraryDependencies ++= Seq(
-  // Framework module
+  // for ScalaQuery
   "jp.sf.amateras.scalagen" %% "scalagen-scalaquery" % "0.1-SNAPSHOT",
-  // JDBC driver
+  // for Anorm
+  //"jp.sf.amateras.scalagen" %% "scalagen-anorm" % "0.1-SNAPSHOT",
+  // JDBC driver for your database
   "org.hsqldb" % "hsqldb" % "2.2.8"
 )
 ```
@@ -66,7 +77,10 @@ In ```build.sbt```, add following configurations:
 seq(jp.sf.amateras.scalagen.ScalagenPlugin.scalagenSettings: _*)
 
 scalagenConfiguration := jp.sf.amateras.scalagen.Settings(
+  // for ScalaQuery
   generator = new jp.sf.amateras.scalagen.ScalaQueryGenerator(),
+  // for Anorm
+  //generator = new jp.sf.amateras.scalagen.ScalaQueryGenerator(),
   driver = "org.hsqldb.jdbcDriver",
   url = "jdbc:hsqldb:hsql://localhost/",
   username = "sa",
