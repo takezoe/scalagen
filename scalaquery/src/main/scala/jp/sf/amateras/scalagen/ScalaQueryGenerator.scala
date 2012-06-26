@@ -10,11 +10,11 @@ class ScalaQueryGenerator extends GeneratorBase {
   def generate(settings: Settings, table: Table): String = {
     import settings._
 
-    if(packageName == ""){
+    (if(packageName == ""){
       ""
     } else {
       "package " + packageName + "\n\n"
-    } +
+    }) +
     "import org.scalaquery.ql.basic.{BasicTable => Table}\n\n" +
     "object " + table.className + "Table extends Table[" + table.className + "](\"" + table.name + "\"){\n" +
     table.columns.map { column =>
@@ -34,3 +34,4 @@ class ScalaQueryGenerator extends GeneratorBase {
 
 
 }
+
