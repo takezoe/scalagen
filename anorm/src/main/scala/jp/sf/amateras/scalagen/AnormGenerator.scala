@@ -10,11 +10,11 @@ class AnormGenerator extends GeneratorBase {
   def generate(settings: Settings, table: Table): String = {
     import settings._
 
-    if(packageName == ""){
+    (if(packageName == ""){
       ""
     } else {
       "package " + packageName + "\n\n"
-    } +
+    }) +
     "import import anorm._\n" +
     "import anorm.SqlParser._\n\n" +
     "case class " + table.className + "(\n" +
