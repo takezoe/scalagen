@@ -11,7 +11,7 @@ case class Settings(
   catalog: String = "%",
   schemaPattern: String = "%",
   tablePattern: String = "%",
-  packageName: String = "",
+  packageName: String = "models",
   targetDir: File = new File("src/main/scala"),
   charset: String = "UTF-8"
 )
