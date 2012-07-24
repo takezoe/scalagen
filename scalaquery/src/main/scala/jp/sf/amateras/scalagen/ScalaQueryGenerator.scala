@@ -30,7 +30,7 @@ class ScalaQueryGenerator extends GeneratorBase {
   }
 
   private def propertyType(column: Column): String =
-    if(column.nullable) { "Option[" + column.typeName + "]" } else { column.typeName }
+    if(column.nullable) { "Option[" + column.scalaType + "]" } else { column.scalaType }
 
 
 }
