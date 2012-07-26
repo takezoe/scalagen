@@ -43,6 +43,7 @@ class SchemaLoader(settings: Settings) {
 
           Some(Column(
             columnName,
+            rs.getString("TYPE_NAME"),
             DataTypes.toClass(rs.getInt("DATA_TYPE")),
             rs.getInt("NULLABLE") match {
               case DatabaseMetaData.columnNullable => true

@@ -18,14 +18,16 @@ case class Table(name: String, columns: List[Column]){
  * The column model.
  *
  * @param name the column name
+ * @param typeName the column type
  * @param dataType the date type of the column
  * @param nullable the nullable flag
+ * @param primaryKey true if it is a primary key
  */
-case class Column(name: String, dataType: Class[_], nullable: Boolean, primaryKey: Boolean){
+case class Column(name: String, typeName: String, dataType: Class[_], nullable: Boolean, primaryKey: Boolean){
 
   val propertyName: String = name.lowercamel()
 
-  val typeName: String = {
+  val scalaType: String = {
     dataType.getName() match {
       case "java.lang.String" => "String"
       case x if(x.indexOf(".") >= 0) => x
