@@ -13,5 +13,6 @@ case class Settings(
   tablePattern: String = "%",
   packageName: String = "models",
   targetDir: File = new File("src/main/scala"),
-  charset: String = "UTF-8"
+  charset: String = "UTF-8",
+  typeMappings: Map[Int, String] = DataTypes.defaultMappings
 )

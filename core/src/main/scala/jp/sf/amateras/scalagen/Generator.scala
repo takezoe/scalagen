@@ -9,6 +9,11 @@ import jp.sf.amateras.scala.util.io._
 trait Generator {
 
   /**
+   * Modifies settings.
+   */
+  def settings(settings: Settings): Settings = settings
+  
+  /**
    * Generates source code.
    */
   def generate(settings: Settings, tables: List[Table]): Unit

@@ -34,11 +34,11 @@ class AnormGenerator extends GeneratorBase {
 
   private def propertyType(column: Column): String =
     if(column.primaryKey){
-      "Pk[" + column.scalaType + "]"
+      "Pk[" + column.dataType + "]"
     } else if(column.nullable) {
-      "Option[" + column.scalaType + "]"
+      "Option[" + column.dataType + "]"
     } else {
-      column.scalaType
+      column.dataType
     }
 
 }

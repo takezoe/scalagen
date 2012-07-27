@@ -3,45 +3,70 @@ package jp.sf.amateras.scalagen
 import java.sql.Types._
 
 object DataTypes {
+  
+  lazy val defaultMappings = Map[Int, String](
+      BIGINT       -> "Int",
+      BIT          -> "Int",
+      BOOLEAN      -> "Boolean",
+      CHAR         -> "String",
+      DATE         -> "java.util.Date",
+      DECIMAL      -> "Int",
+      DOUBLE       -> "Double",
+      FLOAT        -> "Float",
+      INTEGER      -> "Int",
+      LONGNVARCHAR -> "String",
+      LONGVARCHAR  -> "String",
+      NCHAR        -> "String",
+      NUMERIC      -> "Double",
+      NVARCHAR     -> "String",
+      REAL         -> "Double",
+      SMALLINT     -> "Int",
+      SQLXML       -> "scala.xml.NodeSeq",
+      TIME         -> "java.sql.Time",
+      TIMESTAMP    -> "java.sql.Timestamp",
+      TINYINT      -> "Int",
+      VARCHAR      -> "String"
+  )
 
-  def toClass(i: Int): Class[_] = {
+  def toSqlType(i: Int): String = {
     i match {
-      case ARRAY         => throw new IllegalArgumentException("ARRAY(%d) is not supported.".format(i))
-      case BIGINT        => classOf[Int]
-      case BINARY        => throw new IllegalArgumentException("BINARY(%d) is not supported.".format(i))
-      case BIT           => classOf[Int]
-      case BLOB          => throw new IllegalArgumentException("BLOB(%d) is not supported.".format(i))
-      case BOOLEAN       => classOf[Boolean]
-      case CHAR          => classOf[String]
-      case CLOB          => throw new IllegalArgumentException("CLOB(%d) is not supported.".format(i))
-      case DATALINK      => throw new IllegalArgumentException("DATALINK(%d) is not supported.".format(i))
-      case DATE          => classOf[java.util.Date]
-      case DECIMAL       => classOf[Int]
-      case DISTINCT      => throw new IllegalArgumentException("DISTINCT(%d) is not supported.".format(i))
-      case DOUBLE        => classOf[Double]
-      case FLOAT         => classOf[Float]
-      case INTEGER       => classOf[Int]
-      case JAVA_OBJECT   => throw new IllegalArgumentException("JAVA_OBJECT(%d) is not supported.".format(i))
-      case LONGNVARCHAR  => classOf[String]
-      case LONGVARBINARY => throw new IllegalArgumentException("LONGVARBINARY(%d) is not supported.".format(i))
-      case LONGVARCHAR   => classOf[String]
-      case NCHAR         => classOf[String]
-      case NCLOB         => throw new IllegalArgumentException("NCLOB(%d) is not supported.".format(i))
-      case NULL          => throw new IllegalArgumentException("NULL(%d) is not supported.".format(i))
-      case NUMERIC       => classOf[Double]
-      case NVARCHAR      => classOf[String]
-      case OTHER         => throw new IllegalArgumentException("OTHER(%d) is not supported.".format(i))
-      case REAL          => classOf[Double]
-      case REF           => throw new IllegalArgumentException("REF(%d) is not supported.".format(i))
-      case ROWID         => throw new IllegalArgumentException("REFID(%d) is not supported.".format(i))
-      case SMALLINT      => classOf[Int]
-      case SQLXML        => classOf[scala.xml.NodeSeq]
-      case STRUCT        => throw new IllegalArgumentException("STRUCT(%d) is not supported.".format(i))
-      case TIME          => classOf[java.sql.Time]
-      case TIMESTAMP     => classOf[java.sql.Timestamp]
-      case TINYINT       => classOf[Int]
-      case VARBINARY     => throw new IllegalArgumentException("VARBINARY(%d) is not supported.".format(i))
-      case VARCHAR       => classOf[String]
+      case ARRAY         => "ARRAY"
+      case BIGINT        => "BIGINT"
+      case BINARY        => "BINARY"
+      case BIT           => "BIT"
+      case BLOB          => "BLOB"
+      case BOOLEAN       => "BOOLEAN"
+      case CHAR          => "CHAR"
+      case CLOB          => "CLOB"
+      case DATALINK      => "DATALINK"
+      case DATE          => "DATE"
+      case DECIMAL       => "DECIMAL"
+      case DISTINCT      => "DISTINCT"
+      case DOUBLE        => "DOUBLE"
+      case FLOAT         => "FLOAT"
+      case INTEGER       => "INTEGER"
+      case JAVA_OBJECT   => "JAVAOBJECT"
+      case LONGNVARCHAR  => "LONGNVARCHAR"
+      case LONGVARBINARY => "LONGVARBINARY"
+      case LONGVARCHAR   => "LONGVARCHAR"
+      case NCHAR         => "NCHAR"
+      case NCLOB         => "NCLOB"
+      case NULL          => "NULL"
+      case NUMERIC       => "NUMERIC"
+      case NVARCHAR      => "NVARCHAR"
+      case OTHER         => "OTHER"
+      case REAL          => "REAL"
+      case REF           => "REF"
+      case ROWID         => "ROWID"
+      case SMALLINT      => "SMALLINT"
+      case SQLXML        => "SQLXML"
+      case STRUCT        => "STRUCT"
+      case TIME          => "TIME"
+      case TIMESTAMP     => "TIMESTAMP"
+      case TINYINT       => "TINYINT"
+      case VARBINARY     => "VARBINARY"
+      case VARCHAR       => "VARCHAR"
+      case _             => "UNKNOWN"
     }
   }
 
