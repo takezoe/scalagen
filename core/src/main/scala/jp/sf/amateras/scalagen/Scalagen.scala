@@ -17,7 +17,9 @@ package jp.sf.amateras.scalagen
 object Scalagen {
 
   def generate(settings: Settings): Unit = {
-    settings.generator.generate(settings, new SchemaLoader(settings).loadSchema())
+    val modifiedSettings = settings.generator.settings(settings)
+    modifiedSettings.generator.generate(
+        modifiedSettings, new SchemaLoader(modifiedSettings).loadSchema())
   }
 
 }

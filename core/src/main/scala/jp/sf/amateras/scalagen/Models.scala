@@ -23,16 +23,16 @@ case class Table(name: String, columns: List[Column]){
  * @param nullable the nullable flag
  * @param primaryKey true if it is a primary key
  */
-case class Column(name: String, typeName: String, dataType: Class[_], nullable: Boolean, primaryKey: Boolean){
+case class Column(name: String, typeName: String, dataType: String, nullable: Boolean, primaryKey: Boolean){
 
   val propertyName: String = name.lowercamel()
 
-  val scalaType: String = {
-    dataType.getName() match {
-      case "java.lang.String" => "String"
-      case x if(x.indexOf(".") >= 0) => x
-      case x => x.capitalize
-    }
-  }
+//  val scalaType: String = {
+//    dataType.getName() match {
+//      case "java.lang.String" => "String"
+//      case x if(x.indexOf(".") >= 0) => x
+//      case x => x.capitalize
+//    }
+//  }
 
 }

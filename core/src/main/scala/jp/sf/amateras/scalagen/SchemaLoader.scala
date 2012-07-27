@@ -40,11 +40,17 @@ class SchemaLoader(settings: Settings) {
       rs.process { rs =>
         try {
           val columnName = rs.getString("COLUMN_NAME")
+          val dataType = rs.getInt("DATA_TYPE")
 
           Some(Column(
             columnName,
             rs.getString("TYPE_NAME"),
-            DataTypes.toClass(rs.getInt("DATA_TYPE")),
+            typeMappings.getOrElse(dataType,{
+              DataTypes.toSqlType(dataType) match {
+                case "UNKNOWN" => throw new IllegalArgumentException("%i is unknown type.".format(dataType))
+                case sqlType   => throw new IllegalArgumentException("%s is not supported.".format(sqlType))
+              }
+            }),
             rs.getInt("NULLABLE") match {
               case DatabaseMetaData.columnNullable => true
               case _ => false
