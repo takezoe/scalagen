@@ -1,6 +1,7 @@
 package jp.sf.amateras.scalagen
 
 import java.io._
+import org.fusesource.scalate._
 import jp.sf.amateras.scala.util.io._
 
 /**
@@ -21,7 +22,7 @@ trait Generator {
 }
 
 /**
- * A base class for source code generators.
+ * A simplest base class for source code generators.
  */
 abstract class GeneratorBase extends Generator {
 
@@ -45,4 +46,29 @@ abstract class GeneratorBase extends Generator {
 
   def generate(settings: Settings, table: Table): String
 
+}
+
+/**
+ * A base class for source code generators which generates source code using Scalate.
+ */
+abstract class ScalateGeneratorBase extends GeneratorBase {
+  
+  val templatePath: String
+  
+  def generate(settings: Settings, table: Table): String =
+    render(settings, Map("table" -> Table))
+    
+  def render(settings: Settings, attributes: Map[String, Any]): String = {
+    val engine = new TemplateEngine
+    
+    settings.options.get("scala.libraryJar.path").foreach { case (scalaLibraryJarPath: String) =>
+      engine.combinedClassPath = true
+      engine.classpath = scalaLibraryJarPath
+    }
+    
+    val url = getClass().getResource(templatePath)
+    val template = TemplateSource.fromURL(url)
+    engine.layout(template, attributes)
+  }    
+  
 }

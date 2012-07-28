@@ -12,8 +12,9 @@ object ScalagenPlugin extends Plugin {
   val scalagenConfiguration = SettingKey[Settings]("scalagen-settings")
 
   val scalagenSettings: Seq[Project.Setting[_]] = Seq(
-    scalagen <<= (scalagenConfiguration) map { (settings) =>
-      Scalagen.generate(settings)
+    scalagen <<= (scalaInstance, scalagenConfiguration) map { (scala, settings) =>
+      Scalagen.generate(settings.copy(options = settings.options 
+          + ("scala.libraryJar.path" -> scala.libraryJar.getPath)))
     }
   )
 }

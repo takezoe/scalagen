@@ -16,6 +16,7 @@ object Build extends Build {
     settings = commonSettings ++ Seq(
       sbtPlugin := false,
       libraryDependencies ++= Seq(
+        "org.fusesource.scalate" % "scalate-core" % "1.5.3",
         "jp.sf.amateras" %% "scala-utils" % "0.0.1-SNAPSHOT" changing()
       )
     )

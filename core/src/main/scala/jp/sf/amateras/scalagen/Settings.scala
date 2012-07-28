@@ -14,5 +14,6 @@ case class Settings(
   packageName: String = "models",
   targetDir: File = new File("src/main/scala"),
   charset: String = "UTF-8",
-  typeMappings: Map[Int, String] = DataTypes.defaultMappings
+  typeMappings: Map[Int, String] = DataTypes.defaultMappings,
+  options: Map[String, Any] = Map()
 )
