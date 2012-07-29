@@ -1,0 +1,27 @@
+<%@ val settings: jp.sf.amateras.scalagen.Settings %>
+<%@ val table: jp.sf.amateras.scalagen.Table %>
+<% import jp.sf.amateras.scalagen.AnormGenerator._ %>
+<% if(settings.packageName != ""){ %>
+package <%= settings.packageName %>
+
+<% } %>
+import anorm._
+import anorm.SqlParser._
+
+case class <%= table.className %>(
+<% table.columns.zipWithIndex.map { case (c, i) => %>
+  <%= c.propertyName %>: <%= c.propertyType %><%= if(i != table.columns.size - 1){ "," } %>
+<% } %>
+)
+
+object <%= table.className %> {
+  val simple = {
+<% table.columns.zipWithIndex.map { case (c, i) => %>
+    get[<%= c.propertyType %>]("<%= c.name %>")<% if(i != table.columns.size - 1){ %> ~ 
+<% } else { %> map {
+      case <%= table.columns.map{ _.propertyName}.mkString(" ~ ") %> => <%= table.className %>(<%= table.columns.map{_.propertyName}.mkString(", ") %>)
+    }
+<% } %>
+<% } %>
+  }
+}
