@@ -56,10 +56,11 @@ abstract class ScalateGeneratorBase extends GeneratorBase {
   val templatePath: String
   
   def generate(settings: Settings, table: Table): String =
-    render(settings, Map("table" -> Table))
+    render(settings, Map("table" -> table, "settings" -> settings))
     
   def render(settings: Settings, attributes: Map[String, Any]): String = {
     val engine = new TemplateEngine
+    engine.allowCaching =  false
     
     settings.options.get("scala.libraryJar.path").foreach { case (scalaLibraryJarPath: String) =>
       engine.combinedClassPath = true

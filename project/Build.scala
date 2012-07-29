@@ -1,6 +1,7 @@
 import sbt._
 import Keys._
 import java.io.File
+import com.typesafe.sbteclipse.plugin.EclipsePlugin._
 
 object Build extends Build {
 
@@ -60,6 +61,7 @@ object Build extends Build {
             System.getProperty("user.name"), (Path.userHome / ".ssh" / "id_rsa").asFile) withPermissions("0664"))
       },
 
-      publishMavenStyle := true
+      publishMavenStyle := true,
+      EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource
     )
 }
