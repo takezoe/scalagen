@@ -13,7 +13,7 @@ trait Generator {
    * Modifies settings.
    */
   def settings(settings: Settings): Settings = settings
-  
+
   /**
    * Generates source code.
    */
@@ -49,27 +49,48 @@ abstract class GeneratorBase extends Generator {
 }
 
 /**
- * A base class for source code generators which generates source code using Scalate.
+ * Provides Scalate support for Generator implementations.
+ *
+ * Generators can render a Scalate template by render() method.
  */
-abstract class ScalateGeneratorBase extends GeneratorBase {
-  
-  val templatePath: String
-  
-  def generate(settings: Settings, table: Table): String =
-    render(settings, Map("table" -> table, "settings" -> settings))
-    
-  def render(settings: Settings, attributes: Map[String, Any]): String = {
+trait ScalateSupport {
+
+  protected def render(settings: Settings, template: TemplateSource, attributes: Map[String, Any]): String = {
     val engine = new TemplateEngine
     engine.allowCaching =  false
-    
+
     settings.options.get("scala.libraryJar.path").foreach { case (scalaLibraryJarPath: String) =>
       engine.combinedClassPath = true
       engine.classpath = scalaLibraryJarPath
     }
-    
-    val url = getClass().getResource(templatePath)
-    val template = TemplateSource.fromURL(url)
+
     engine.layout(template, attributes)
-  }    
-  
+  }
+
+}
+
+/**
+ * A base class for source code generators which generates source code using Scalate.
+ */
+abstract class ScalateGeneratorBase extends GeneratorBase with ScalateSupport {
+
+  val templatePath: String
+
+  def generate(settings: Settings, table: Table): String =
+    render(settings,
+        TemplateSource.fromURL(getClass().getResource(templatePath)),
+        Map("table" -> table, "settings" -> settings))
+
+}
+
+/**
+ * A generic implementation of Generator which generates source code by the specified Scalate template.
+ */
+class ScalateGenerator(val template: java.io.File) extends GeneratorBase with ScalateSupport {
+
+  def generate(settings: Settings, table: Table): String =
+    render(settings,
+        TemplateSource.fromFile(this.template.getAbsolutePath()),
+        Map("table" -> table, "settings" -> settings))
+
 }
