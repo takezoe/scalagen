@@ -26,6 +26,9 @@ trait Generator {
  */
 abstract class GeneratorBase extends Generator {
 
+  /**
+   * Generates source files.
+   */
   def generate(settings: Settings, tables: List[Table]): Unit = {
     import settings._
 
@@ -44,6 +47,9 @@ abstract class GeneratorBase extends Generator {
     }
   }
 
+  /**
+   * Override this method to return source code in the subclass.
+   */
   def generate(settings: Settings, table: Table): String
 
 }
@@ -55,6 +61,9 @@ abstract class GeneratorBase extends Generator {
  */
 trait ScalateSupport {
 
+  /**
+   * Renders a template with given attributes.
+   */
   protected def render(settings: Settings, template: TemplateSource, attributes: Map[String, Any]): String = {
     val engine = new TemplateEngine
     engine.allowCaching =  false
@@ -74,6 +83,9 @@ trait ScalateSupport {
  */
 abstract class ScalateGeneratorBase extends GeneratorBase with ScalateSupport {
 
+  /**
+   * Specify the template path in classpath.
+   */
   val templatePath: String
 
   def generate(settings: Settings, table: Table): String =
