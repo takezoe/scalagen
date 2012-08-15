@@ -15,5 +15,6 @@ case class Settings(
   targetDir: File = new File("src/main/scala"),
   charset: String = "UTF-8",
   typeMappings: Map[Int, String] = DataTypes.defaultMappings,
-  options: Map[String, Any] = Map()
+  options: Map[String, Any] = Map(),
+  excludeTablePattern: String = ""
 )

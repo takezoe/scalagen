@@ -26,7 +26,8 @@ class SchemaLoader(settings: Settings) {
             case "TABLE" => Some(rs.getString("TABLE_NAME"))
             case _ => None
           }
-        }.flatten.map { name => loadTable(conn, name) }.toList
+        }.flatten.filterNot { excludeTablePattern.nonEmpty && _.matches(excludeTablePattern) 
+        }.map { name => loadTable(conn, name) }.toList
       }
     }
   }
