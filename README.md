@@ -137,7 +137,7 @@ Scalagen.generate(Settings(
 Following variables are available in the specified Scalate template file:
 
 variable name | type                        
---------------+--------------------------------
+--------------|--------------------------------
 table         |jp.sf.amateras.scalagen.Table
 settings      |jp.sf.amateras.scalagen.Settings
 
