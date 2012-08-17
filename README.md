@@ -56,6 +56,27 @@ Anorm        | scalagen-anorm      | jp.sf.amateras.scalagen.AnormGenerator
 Squeryl      | TBD                 | TBD
 mirage-scala | TBD                 | TBD
 
+Scalagen also provides ```ScalateGenerator``` to generate source code by Scalate template which is written by users.
+
+You can generate source code using your own Scalate template without Generator implementing by using this class as Generator.
+This is a configuration example of ```ScalateGenerator```:
+
+```scala
+import jp.sf.amateras.scalagen._
+
+Scalagen.generate(Settings(
+  generator = new ScalateGenerator(new java.io.File("template/my.ssp")),
+  ...
+)
+```
+
+Following variables are available in the specified Scalate template file:
+
+variable name | type                        
+--------------|--------------------------------
+table         |jp.sf.amateras.scalagen.Table
+settings      |jp.sf.amateras.scalagen.Settings
+
 ##sbt-plugin
 
 Scalagen could be used as sbt-plugin. In ```project/plugin.sbt```, add:
@@ -117,31 +138,3 @@ as an example of Generator implementation which is based on ```GeneratorBase```.
 See [AnormGeenrator](https://github.com/takezoe/scalagen/blob/master/anorm/src/main/scala/jp/sf/amateras/scalagen/AnormGenerator.scala) and
 [its template](https://github.com/takezoe/scalagen/blob/master/anorm/src/main/resources/jp/sf/amateras/scalagen/AnormGenerator.ssp) 
 as an example of Generator implementation which is base on ```ScalateGenerator```.
-
-### jp.sf.amateras.scalagen.ScalateGenerator
-
-```ScalateGenerator``` is a concrete class　to generate source code by Scalate template which is written by users.
-
-You can generate source code using your own Scalate template without Generator implementing by using this class as Generator.
-This is a configuration example of ```ScalateGenerator```:
-
-```scala
-import jp.sf.amateras.scalagen._
-
-Scalagen.generate(Settings(
-  generator = new ScalateGenerator(new java.io.File("template/my.ssp")),
-  ...
-)
-```
-
-Following variables are available in the specified Scalate template file:
-
-variable name | type                        
---------------|--------------------------------
-table         |jp.sf.amateras.scalagen.Table
-settings      |jp.sf.amateras.scalagen.Settings
-
-###Type Mapping
-
-TBD
-
