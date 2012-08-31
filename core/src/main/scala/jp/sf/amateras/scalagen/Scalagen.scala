@@ -17,7 +17,15 @@ package jp.sf.amateras.scalagen
 object Scalagen {
 
   def generate(settings: Settings): Unit = {
+    // overrides settings by the generator
     val modifiedSettings = settings.generator.settings(settings)
+    // removes existing source files (*.scala)
+    settings.targetDir.listFiles().foreach { file =>
+      if(file.isFile && file.getName.endsWith(".scala")){
+        file.delete
+      }
+    }
+    // generates source files
     modifiedSettings.generator.generate(
         modifiedSettings, new SchemaLoader(modifiedSettings).loadSchema())
   }
