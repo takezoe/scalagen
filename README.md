@@ -139,3 +139,9 @@ as an example of Generator implementation which is based on ```GeneratorBase```.
 See [AnormGeenrator](https://github.com/takezoe/scalagen/blob/master/anorm/src/main/scala/jp/sf/amateras/scalagen/AnormGenerator.scala) and
 [its template](https://github.com/takezoe/scalagen/blob/master/anorm/src/main/resources/jp/sf/amateras/scalagen/AnormGenerator.ssp) 
 as an example of Generator implementation which is base on ```ScalateGenerator```.
+
+Release Notes
+--------
+### 0.1 - 17 Sep 2012
+
+* Initial Release.
