@@ -83,15 +83,15 @@ settings      |jp.sf.amateras.scalagen.Settings
 Scalagen could be used as sbt-plugin. In ```project/plugin.sbt```, add:
 
 ```scala
-resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn-snapshot/")
+resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn/")
 
-addSbtPlugin("jp.sf.amateras.scalagen" % "scalagen-sbtplugin" % "0.1-SNAPSHOT")
+addSbtPlugin("jp.sf.amateras.scalagen" % "scalagen-sbtplugin" % "0.1")
 
 libraryDependencies ++= Seq(
   // for ScalaQuery
-  "jp.sf.amateras.scalagen" %% "scalagen-scalaquery" % "0.1-SNAPSHOT",
+  "jp.sf.amateras.scalagen" %% "scalagen-scalaquery" % "0.1",
   // for Anorm
-  //"jp.sf.amateras.scalagen" %% "scalagen-anorm" % "0.1-SNAPSHOT",
+  //"jp.sf.amateras.scalagen" %% "scalagen-anorm" % "0.1",
   // JDBC driver for your database
   "org.hsqldb" % "hsqldb" % "2.2.8"
 )
