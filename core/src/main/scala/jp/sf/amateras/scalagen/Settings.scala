@@ -16,5 +16,6 @@ case class Settings(
   charset: String = "UTF-8",
   typeMappings: Map[Int, String] = DataTypes.defaultMappings,
   options: Map[String, Any] = Map(),
+  includeTablePattern: String = "",
   excludeTablePattern: String = ""
 )
