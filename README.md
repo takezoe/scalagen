@@ -83,7 +83,7 @@ settings      |jp.sf.amateras.scalagen.Settings
 Scalagen could be used as sbt-plugin. In ```project/plugin.sbt```, add:
 
 ```scala
-resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn/")
+resolvers += ("amateras repository" at "http://amateras.sourceforge.jp/mvn/")
 
 addSbtPlugin("jp.sf.amateras.scalagen" % "scalagen-sbtplugin" % "0.1")
 
