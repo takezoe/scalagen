@@ -18,7 +18,7 @@ object Build extends Build {
       sbtPlugin := false,
       libraryDependencies ++= Seq(
         "org.fusesource.scalate" % "scalate-core" % "1.5.3",
-        "jp.sf.amateras" %% "scala-utils" % "0.0.1-SNAPSHOT" changing()
+        "jp.sf.amateras" %% "scala-utils" % "0.0.1" changing()
       )
     )
   )
@@ -46,9 +46,9 @@ object Build extends Build {
 
   def commonSettings = Defaults.defaultSettings ++
     Seq(
-      version := "0.1",
+      version := "0.2",
       organization := "jp.sf.amateras.scalagen",
-      resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn-snapshot/"),
+      resolvers += ("amateras snapshot" at "http://amateras.sourceforge.jp/mvn/"),
 
       publishTo <<= (version) { version: String =>
         val repoInfo =
