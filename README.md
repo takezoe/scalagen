@@ -85,13 +85,13 @@ Scalagen could be used as sbt-plugin. In ```project/plugin.sbt```, add:
 ```scala
 resolvers += ("amateras repository" at "http://amateras.sourceforge.jp/mvn/")
 
-addSbtPlugin("jp.sf.amateras.scalagen" % "scalagen-sbtplugin" % "0.1")
+addSbtPlugin("jp.sf.amateras.scalagen" % "scalagen-sbtplugin" % "0.2")
 
 libraryDependencies ++= Seq(
   // for ScalaQuery
-  "jp.sf.amateras.scalagen" %% "scalagen-scalaquery" % "0.1",
+  "jp.sf.amateras.scalagen" %% "scalagen-scalaquery" % "0.2",
   // for Anorm
-  //"jp.sf.amateras.scalagen" %% "scalagen-anorm" % "0.1",
+  //"jp.sf.amateras.scalagen" %% "scalagen-anorm" % "0.2",
   // JDBC driver for your database
   "org.hsqldb" % "hsqldb" % "2.2.8"
 )
@@ -142,6 +142,10 @@ as an example of Generator implementation which is base on ```ScalateGenerator``
 
 Release Notes
 --------
+### 0.2 - 15 Nov 2012
+
+* Updated depended library versions.
+
 ### 0.1 - 17 Sep 2012
 
 * Initial Release.
