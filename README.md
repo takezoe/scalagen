@@ -78,7 +78,7 @@ variable name | type
 table         |jp.sf.amateras.scalagen.Table
 settings      |jp.sf.amateras.scalagen.Settings
 
-##sbt-plugin
+## sbt-plugin
 
 Scalagen could be used as sbt-plugin. In ```project/plugin.sbt```, add:
 
