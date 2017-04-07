@@ -25,7 +25,7 @@ Source files would be generated into ```/src/main/scala/models```.
 Scalagen is still under development. So it has never been published to the public repository.
 You can get source code and build it from this git repository.
 
-##Configuration
+## Configuration
 
 You can configure Scalagen via ```jp.sf.amateras.scalagen.Settings```.
 
@@ -46,7 +46,7 @@ targetDir          | File            | output directory of generated source (def
 charset            | String          | chaarset of generated source (default is "UTF-8")
 typeMappings       | Map[Int, String]| mappings of SQL type to Scala type (default is DataTypes.defaultMappings)
 
-###Generators
+### Generators
 
 Scalagen supports following ORMs. Specify a generator which corresponds to your ORM at ```Settings#generator```.
 
